@@ -3,6 +3,8 @@ from kivy.uix.label import Label
 from datetime import datetime
 from kivy.app import App
 from kivy.clock import Clock
+from pprint import pprint
+import requests
 
 
 class DateTimeScreen(GridLayout):
@@ -20,7 +22,7 @@ class DateTimeScreen(GridLayout):
         self.cols = 1
         self.add_widget(
             Label(
-                text=day + " " + str(date.date().strftime("%d.%m.%Y")),
+                text= day + " " + str(date.date().strftime("%d.%m.%Y")),
                 font_size="40")
             )
         self.add_widget(
@@ -31,8 +33,14 @@ class DateTimeScreen(GridLayout):
 
 
 class SmartMirror(App):
+
+    weatherURL = "http://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1"
+
     def build(self):
-        timeScreen = DateTimeScreen();
+        r = requests.get(self.weatherURL)
+        pprint(r.json())
+
+        timeScreen = DateTimeScreen()
         Clock.schedule_interval(timeScreen.update, 1)
         return timeScreen
 
