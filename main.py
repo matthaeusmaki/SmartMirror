@@ -20,7 +20,7 @@ class DateTimeScreen(GridLayout):
         self.cols = 1
         self.add_widget(
             Label(
-                text= day + " " + str(date.date().strftime("%d.%m.%Y")),
+                text=day + " " + str(date.date().strftime("%d.%m.%Y")),
                 font_size="40")
             )
         self.add_widget(
